@@ -2,7 +2,6 @@
   "name": "ygqygq2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vitepress dev",
@@ -13,11 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/chrome-remote-interface": "^0.31.10",
     "@types/node": "^20.4.4",
+    "puppeteer": "^20.9.0",
+    "sharp": "^0.32.4",
     "vitepress": "1.0.0-beta.5"
   },
   "dependencies": {
-    "chrome-remote-interface": "^0.31.1"
+    "vue": "^3.3.4"
   }
 }

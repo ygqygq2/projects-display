@@ -1,80 +1,62 @@
-import CDP from "chrome-remote-interface";
-import fs from "fs";
+const puppeteer = require('puppeteer');
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
 
-// CLI Args
-const argv = require("minimist")(process.argv.slice(2));
-const url: string = argv.url || "https://www.google.com";
-const format: "jpeg" | "png" = argv.format === "jpeg" ? "jpeg" : "png";
-const viewportWidth: number = argv.viewportWidth || 1440;
-const viewportHeight: number = argv.viewportHeight || 900;
-const delay: number = argv.delay || 0;
-const userAgent: string = argv.userAgent;
-const fullPage: boolean = argv.full;
+// 网址和文件名
+const WEB_URLS: { name: string; url: string }[] = [{ url: 'https://wenjuan.ygqygq2.com', name: 'wenjuan.png' }];
+// 是否更新缩略图
+const RENEW: boolean = false;
+// 保存缩略图的目录，相对于项目上根目录
+const OUTPUT_PATH: string = './images';
 
-// Start the Chrome Debugging Protocol
-CDP(async (client) => {
-  // Extract used DevTools domains.
-  const { DOM, Emulation, Network, Page, Runtime } = client;
+async function generateThumbnail(url: string, outputPath: string): Promise<void> {
+  const browser = await puppeteer.launch({ headless: 'new' });
+  const page = await browser.newPage();
+  await page.goto(url);
 
-  // Enable events on domains we are interested in.
-  await Page.enable();
-  await DOM.enable();
-  await Network.enable();
+  // 调整视口大小以适应截图
+  await page.setViewport({ width: 1280, height: 720 });
 
-  // If user agent override was specified, pass it to the Network domain.
-  if (userAgent) {
-    await Network.setUserAgentOverride({ userAgent });
-  }
-
-  // Set up viewport resolution, etc.
-  const deviceMetrics = {
-    width: viewportWidth,
-    height: viewportHeight,
-    deviceScaleFactor: 0,
-    mobile: false,
-    fitWindow: false,
-  };
-  await Emulation.setDeviceMetricsOverride(deviceMetrics);
-  await Emulation.setVisibleSize({ width: viewportWidth, height: viewportHeight });
-
-  // Navigate to target page
-  await Page.navigate({ url });
-
-  // Wait for page load event to take screenshot
-  Page.loadEventFired(async () => {
-    // If the `full` CLI option was passed, we need to measure the height of
-    // the rendered page and use Emulation.setVisibleSize
-    if (fullPage) {
-      const {
-        root: { nodeId: documentNodeId },
-      } = await DOM.getDocument();
-      const { nodeId: bodyNodeId } = await DOM.querySelector({
-        selector: "body",
-        nodeId: documentNodeId,
-      });
-      const {
-        model: { height },
-      } = await DOM.getBoxModel({ nodeId: bodyNodeId });
-
-      await Emulation.setVisibleSize({ width: viewportWidth, height: height });
-      // This forceViewport call ensures that content outside the viewport is
-      // rendered, otherwise it shows up as grey. Possibly a bug?
-      await Emulation.forceViewport({ x: 0, y: 0, scale: 1 });
+  // 判断是否需要更新缩略图
+  if (RENEW) {
+    await page.screenshot({ path: outputPath });
+    await sharp(outputPath).resize(300).toFile(outputPath.replace('.png', '-thumbnail.png'));
+  } else {
+    // 先判断文件是否存在，不存在则创建，存在则根据是否需要更新缩略图生成
+    if (!fs.existsSync(outputPath)) {
+      await page.screenshot({ path: outputPath });
+      await sharp(outputPath).resize(300).toFile(outputPath.replace('.png', '-thumbnail.png'));
     }
+  }
+  // 调整缩略图大小
+  await browser.close();
+}
 
-    setTimeout(async () => {
-      const screenshot = await Page.captureScreenshot({ format });
-      const buffer = Buffer.from(screenshot.data, "base64");
-      fs.writeFile("output.png", buffer, "base64", (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log("Screenshot saved");
-        }
-        client.close();
-      });
-    }, delay);
+function getRootPath(): string {
+  // 获取项目根目录
+  const cwd = process.cwd();
+  // 获取项目根目录下的 images 目录
+  const imageRootPath: string = path.join(cwd, OUTPUT_PATH);
+  // 判断 images 目录是否存在，不存在则创建
+  if (!fs.existsSync(imageRootPath)) {
+    fs.mkdirSync(imageRootPath);
+  }
+  return imageRootPath;
+}
+
+const imageRootPath = getRootPath();
+
+(async () => {
+  const tasks = WEB_URLS.map(async (url: { name: string; url: string }) => {
+    try {
+      const outputPath: string = path.join(imageRootPath, url.name);
+      await generateThumbnail(url.url, outputPath);
+      console.log('缩略图生成成功！');
+    } catch (error) {
+      console.error('生成缩略图时出错：', error);
+    }
   });
-}).on("error", (err) => {
-  console.error("Cannot connect to browser:", err);
-});
+
+  await Promise.all(tasks);
+})();

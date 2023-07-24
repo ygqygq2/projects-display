@@ -15,10 +15,10 @@ hero:
       link: /api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 问卷调查
+    details: 一个基于问卷组件的调查问卷系统
+  - title: 项目 B
+    details: xxxx
+  - title: 项目 C
+    details: xxxx
 ---
