@@ -30,9 +30,9 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
+      - run: pnpm i
       - name: Screenshot image
         run: ts-node tools/screenshot.ts
-      - run: pnpm i
       - name: Build
         run: pnpm run docs:build
       - uses: actions/configure-pages@v3

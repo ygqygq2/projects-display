@@ -1,5 +1,5 @@
 {
-  "name": "ygqygq2",
+  "name": "project-display",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -16,6 +16,7 @@
     "@types/node": "^20.4.5",
     "puppeteer": "^20.9.0",
     "sharp": "^0.32.4",
+    "typescript": "^5.1.6",
     "vite": "^4.4.7",
     "vitepress": "1.0.0-beta.6"
   },

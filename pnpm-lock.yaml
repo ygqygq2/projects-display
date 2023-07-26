@@ -30,10 +30,13 @@ devDependencies:
     version: 20.4.5
   puppeteer:
     specifier: ^20.9.0
-    version: 20.9.0
+    version: 20.9.0(typescript@5.1.6)
   sharp:
     specifier: ^0.32.4
     version: 0.32.4
+  typescript:
+    specifier: ^5.1.6
+    version: 5.1.6
   vite:
     specifier: ^4.4.7
     version: 4.4.7(@types/node@20.4.5)(sass@1.64.1)
@@ -461,7 +464,7 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@puppeteer/browsers@1.4.6:
+  /@puppeteer/browsers@1.4.6(typescript@5.1.6):
     resolution: {integrity: sha512-x4BEjr2SjOPowNeiguzjozQbsc6h437ovD/wu+JpaenxVLm3jkgzHY2xOslMTp50HoTvQreMjiexiGQw1sqZlQ==}
     engines: {node: '>=16.3.0'}
     hasBin: true
@@ -476,6 +479,7 @@ packages:
       progress: 2.0.3
       proxy-agent: 6.3.0
       tar-fs: 3.0.4
+      typescript: 5.1.6
       unbzip2-stream: 1.4.3
       yargs: 17.7.1
     transitivePeerDependencies:
@@ -1463,7 +1467,7 @@ packages:
       once: 1.4.0
     dev: true
 
-  /puppeteer-core@20.9.0:
+  /puppeteer-core@20.9.0(typescript@5.1.6):
     resolution: {integrity: sha512-H9fYZQzMTRrkboEfPmf7m3CLDN6JvbxXA3qTtS+dFt27tR+CsFHzPsT6pzp6lYL6bJbAPaR0HaPO6uSi+F94Pg==}
     engines: {node: '>=16.3.0'}
     peerDependencies:
@@ -1472,11 +1476,12 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@puppeteer/browsers': 1.4.6
+      '@puppeteer/browsers': 1.4.6(typescript@5.1.6)
       chromium-bidi: 0.4.16(devtools-protocol@0.0.1147663)
       cross-fetch: 4.0.0
       debug: 4.3.4
       devtools-protocol: 0.0.1147663
+      typescript: 5.1.6
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -1485,14 +1490,14 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer@20.9.0:
+  /puppeteer@20.9.0(typescript@5.1.6):
     resolution: {integrity: sha512-kAglT4VZ9fWEGg3oLc4/de+JcONuEJhlh3J6f5R1TLkrY/EHHIHxWXDOzXvaxQCtedmyVXBwg8M+P8YCO/wZjw==}
     engines: {node: '>=16.3.0'}
     requiresBuild: true
     dependencies:
-      '@puppeteer/browsers': 1.4.6
+      '@puppeteer/browsers': 1.4.6(typescript@5.1.6)
       cosmiconfig: 8.2.0
-      puppeteer-core: 20.9.0
+      puppeteer-core: 20.9.0(typescript@5.1.6)
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -1758,6 +1763,12 @@ packages:
     resolution: {integrity: sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=}
     dependencies:
       safe-buffer: 5.2.1
+    dev: true
+
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+    engines: {node: '>=14.17'}
+    hasBin: true
     dev: true
 
   /unbzip2-stream@1.4.3:
