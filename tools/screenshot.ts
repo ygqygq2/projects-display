@@ -17,6 +17,17 @@ interface Project {
 async function readConfigFile() {
   const configFile = fs.readFileSync(path.join(__dirname, '../config.yaml'));
   const config: any = yaml.load(configFile);
+  // 配置写到 config.data.ts 中，以便 vitepress 组件读取
+  const contentStr = `
+  export default {
+    load() {
+      return {
+        data: ${JSON.stringify(config.projects)}
+      }
+    }
+  }
+  `;
+  fs.writeFileSync(path.join(__dirname, './config.data.ts'), contentStr);
   return config;
 }
 
@@ -52,7 +63,7 @@ async function generateThumbnail(renew: boolean, project: Project): Promise<void
 
 (async () => {
   const config = await readConfigFile();
-  console.log("🚀 ~ file: screenshot.ts:57 ~ config:", config);
+  console.log('🚀 ~ file: screenshot.ts:57 ~ config:', config);
   const { renew } = config;
   const projects: Project[] = config.projects;
   const tasks = projects.map(async (project) => {

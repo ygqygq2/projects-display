@@ -1,7 +1,7 @@
 <script setup lang="ts" name="CardContent">
 import {ref, onMounted} from 'vue';
-import readConfigFile from '../api/getLocalData';
 import '../styles/base.scss';
+import {data} from '../../tools/config.data';
 
 // 识别不到全局的定义类型，只好写在这了
 interface Project {
@@ -12,12 +12,7 @@ interface Project {
   backend: string;
 }
 
-async function fetchData() {
-  const config = await readConfigFile();
-  projects.value = config.projects as Project[];
-}
-
-let projects = ref<Project[]>([]);
+const projects = ref<Project[]>(data.data)
 
 function goToProject(url: string): void {
   window.open(url, '_blank');
@@ -29,7 +24,6 @@ onMounted(() => {
   script.defer = true;
   document.body.appendChild(script);
 
-  fetchData();
 
   // Load more projects when scrolling
   window.addEventListener('scroll', loadMoreProjects);

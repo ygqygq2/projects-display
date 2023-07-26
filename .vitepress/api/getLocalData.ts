@@ -1,5 +1,4 @@
 import * as yaml from 'js-yaml';
-import { config } from 'process';
 
 async function readConfigFile() {
   try {
