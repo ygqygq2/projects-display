@@ -30,6 +30,8 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
+      - name: Screenshot image
+        run: ts-node tools/screenshot.ts
       - run: pnpm i
       - name: Build
         run: pnpm run docs:build

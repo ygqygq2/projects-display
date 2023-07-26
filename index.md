@@ -15,7 +15,3 @@ layout: home
 #       link: /api-examples
 
 ---
-<script setup>
-import Content from './.vitepress/components/Content.vue'
-</script>
-<Content />

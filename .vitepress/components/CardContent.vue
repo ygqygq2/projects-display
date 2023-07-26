@@ -1,0 +1,74 @@
+<script setup lang="ts" name="CardContent">
+import {ref, onMounted} from 'vue';
+import readConfigFile from '../api/getLocalData';
+import '../styles/base.scss';
+
+// 识别不到全局的定义类型，只好写在这了
+interface Project {
+  title: string;
+  description: string;
+  thumbnail: string;
+  frontend: string;
+  backend: string;
+}
+
+async function fetchData() {
+  const config = await readConfigFile();
+  projects.value = config.projects as Project[];
+}
+
+let projects = ref<Project[]>([]);
+
+function goToProject(url: string): void {
+  window.open(url, '_blank');
+}
+
+onMounted(() => {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+  script.defer = true;
+  document.body.appendChild(script);
+
+  fetchData();
+
+  // Load more projects when scrolling
+  window.addEventListener('scroll', loadMoreProjects);
+});
+
+function loadMoreProjects(): void {
+  // Implement your logic to load more projects here
+}
+</script>
+
+<template>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="project, index in projects" :key="index">
+        <div class="card bg-secondary-subtle">
+          <img :src="project.thumbnail" alt="Project Thumbnail" class="img-fluid rounded">
+          <div class="card-body">
+            <button v-if="project.frontend" type="button" class="btn btn-sm btn-info text-white"
+              @click="goToProject(project.frontend)">前台</button>
+            <button v-if="project.backend" type="button" class="btn btn-sm btn-secondary"
+              @click="goToProject(project.backend)">后台</button>
+            <h5 class="card-title text-center align-middle text-success">{{ project.title }}</h5>
+            <p class="card-text text-sm text-truncate">{{ project.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+/* @import '../styles/base.scss'; */
+
+.card-body>button {
+  margin-right: 10px;
+}
+
+.card-title {
+  line-height: 1.2;
+  margin: 10px 0;
+}
+</style>
