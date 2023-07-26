@@ -32,7 +32,9 @@ jobs:
           cache: pnpm
       - run: pnpm i
       - name: Screenshot image
-        run: ts-node tools/screenshot.ts
+        run: |
+          pnpm i -g ts-node
+          ts-node tools/screenshot.ts
       - name: Build
         run: pnpm run docs:build
       - uses: actions/configure-pages@v3
