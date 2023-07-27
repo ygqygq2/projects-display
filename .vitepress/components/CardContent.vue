@@ -46,7 +46,7 @@ function loadMoreProjects(): void {
             <button v-if="project.backend" type="button" class="btn btn-sm btn-secondary"
               @click="goToProject(project.backend)">后台</button>
             <h5 class="card-title text-center align-middle text-success">{{ project.title }}</h5>
-            <p class="card-text text-sm text-truncate">{{ project.description }}</p>
+            <p class="card-text text-sm text-truncate" :title="project.description">{{ project.description }}</p>
           </div>
         </div>
       </div>

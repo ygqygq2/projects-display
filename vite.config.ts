@@ -7,8 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/.vitepress',
-      '~bootstrap': path.resolve(__dirname, './node_modules/bootstrap'),
-      '@images': path.resolve(__dirname, './images'),
+      '~': path.resolve(__dirname, './node_modules'),
     },
   },
   build: {
