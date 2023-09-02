@@ -1,6 +1,5 @@
 <script setup lang="ts" name="CardContent">
 import {ref, onMounted} from 'vue';
-import '../styles/base.scss';
 import {data} from '../../tools/config.data';
 
 // 识别不到全局的定义类型，只好写在这了
@@ -12,19 +11,13 @@ interface Project {
   backend: string;
 }
 
-const projects = ref<Project[]>(data.data)
+const projects = ref<Project[]>(data)
 
 function goToProject(url: string): void {
   window.open(url, '_blank');
 }
 
 onMounted(() => {
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
-  script.defer = true;
-  document.body.appendChild(script);
-
-
   // Load more projects when scrolling
   window.addEventListener('scroll', loadMoreProjects);
 });
@@ -55,8 +48,6 @@ function loadMoreProjects(): void {
 </template>
 
 <style lang="scss" scoped>
-/* @import '../styles/base.scss'; */
-
 .card-body>button {
   margin-right: 10px;
 }
