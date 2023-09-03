@@ -33,14 +33,18 @@ jobs:
       - run: pnpm i
       - name: Screenshot image
         run: |
-          pnpm i -g ts-node
-          ts-node tools/screenshot.ts
+          pnpm i -g typescript
+          cd tools
+          tsc screenshot.ts
+          \mv screenshot.js screenshot.cjs
+          cd ..
+          node tools/screenshot.cjs
       - name: Build
         run: pnpm run docs:build
       - uses: actions/configure-pages@v3
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: .vitepress/dist
+          path: dist
 
   deploy:
     environment:

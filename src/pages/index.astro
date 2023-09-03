@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CardContent from '../components/CardContent.vue';
+import ContactSidebar from '../components/ContactSidebar.vue';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -16,6 +17,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header title={SITE_TITLE} />
 		<main class="container">
 			<CardContent />
+			<ContactSidebar />
 		</main>
 		<Footer />
 	</body>

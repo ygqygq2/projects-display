@@ -25,6 +25,10 @@ onMounted(() => {
 function loadMoreProjects(): void {
   // Implement your logic to load more projects here
 }
+
+function correctedThumbnail(thumbnail: string) {
+  return thumbnail.replace('/public', '');
+}
 </script>
 
 <template>
@@ -32,7 +36,7 @@ function loadMoreProjects(): void {
     <div class="row">
       <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="project, index in projects" :key="index">
         <div class="card bg-secondary-subtle">
-          <img :src="project.thumbnail" alt="Project Thumbnail" class="img-fluid rounded">
+          <img :src="correctedThumbnail(project.thumbnail)" alt="Project Thumbnail" class="img-fluid rounded">
           <div class="card-body">
             <button v-if="project.frontend" type="button" class="btn btn-sm btn-info text-pink-600"
               @click="goToProject(project.frontend)">前台</button>
