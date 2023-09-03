@@ -18,15 +18,7 @@ async function readConfigFile() {
   const configFile = fs.readFileSync(path.join(__dirname, '../config.yaml'));
   const config: any = yaml.load(configFile);
   // 配置写到 config.data.ts 中，以便 vitepress 组件读取
-  const contentStr = `
-  export default {
-    load() {
-      return {
-        data: ${JSON.stringify(config.projects)}
-      }
-    }
-  }
-  `;
+  const contentStr = `${JSON.stringify(config.projects)}`;
   fs.writeFileSync(path.join(__dirname, './config.data.ts'), contentStr);
   return config;
 }

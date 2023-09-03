@@ -30,7 +30,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "include": [
+  "exclude": [
     "tools/*.ts",
   ],
   "references": [

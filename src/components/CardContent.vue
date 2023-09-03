@@ -34,9 +34,9 @@ function loadMoreProjects(): void {
         <div class="card bg-secondary-subtle">
           <img :src="project.thumbnail" alt="Project Thumbnail" class="img-fluid rounded">
           <div class="card-body">
-            <button v-if="project.frontend" type="button" class="btn btn-sm btn-info text-white"
+            <button v-if="project.frontend" type="button" class="btn btn-sm btn-info text-pink-600"
               @click="goToProject(project.frontend)">前台</button>
-            <button v-if="project.backend" type="button" class="btn btn-sm btn-secondary"
+            <button v-if="project.backend" type="button" class="btn btn-sm btn-secondary text-green-600"
               @click="goToProject(project.backend)">后台</button>
             <h5 class="card-title text-center align-middle text-success">{{ project.title }}</h5>
             <p class="card-text text-sm text-truncate" :title="project.description">{{ project.description }}</p>
