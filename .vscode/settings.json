@@ -1,5 +1,12 @@
 {
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///data/git/ygqygq2/projects-display/.github/workflows/deploy.yml"
-  }
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro", // Enable .astro
+    "typescript", // Enable .ts
+    "typescriptreact" // Enable .tsx
+  ]
 }
