@@ -14,6 +14,7 @@ interface Project {
 const projects = ref<Project[]>(data)
 
 function goToProject(url: string): void {
+  console.log("🚀 ~ file: CardContent.vue:17 ~ goToProject ~ url:", url);
   window.open(url, '_blank');
 }
 

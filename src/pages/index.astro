@@ -16,8 +16,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header title={SITE_TITLE} />
 		<main class="container">
-			<CardContent />
-			<ContactSidebar />
+			<CardContent client:load />
+			<ContactSidebar client:load />
 		</main>
 		<Footer />
 	</body>
