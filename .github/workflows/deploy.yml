@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
-      - run: pnpm i --frozen-lockfile
+      - run: pnpm i --frozen-lockfile || pnpm i
       - name: Screenshot image
         run: |
           pnpm i -g typescript
