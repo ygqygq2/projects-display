@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^20.9.0
     version: 20.9.0(typescript@5.1.6)
   sharp:
-    specifier: ^0.32.4
-    version: 0.32.4
+    specifier: ^0.32.6
+    version: 0.32.6
   simple-git-hooks:
     specifier: ^2.9.0
     version: 2.9.0
@@ -2061,7 +2061,7 @@ packages:
       resolve: 1.22.4
       semver: 7.5.4
       server-destroy: 1.0.1
-      sharp: 0.32.5
+      sharp: 0.32.6
       shiki: 0.14.3
       string-width: 6.1.0
       strip-ansi: 7.1.0
@@ -5798,8 +5798,8 @@ packages:
     resolution: {integrity: sha1-8Tv5KOQrnD55OD5hzDmYtdFObN0=}
     dev: false
 
-  /sharp@0.32.4:
-    resolution: {integrity: sha512-exUnZewqVZC6UXqXuQ8fyJJv0M968feBi04jb9GcUHrWtkRoAKnbJt8IfwT4NJs7FskArbJ14JAFGVuooszoGg==}
+  /sharp@0.32.6:
+    resolution: {integrity: sha512-KyLTWwgcR9Oe4d9HwCwNM2l7+J0dUQwn/yf7S0EnTtb0eVS4RxO0eUSvxPtzT4F3SY+C4K6fqdv/DO27sJ/v/w==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
@@ -5811,22 +5811,6 @@ packages:
       simple-get: 4.0.1
       tar-fs: 3.0.4
       tunnel-agent: 0.6.0
-    dev: true
-
-  /sharp@0.32.5:
-    resolution: {integrity: sha512-0dap3iysgDkNaPOaOL4X/0akdu0ma62GcdC2NBQ+93eqpePdDdr2/LM0sFdDSMmN7yS+odyZtPsb7tx/cYBKnQ==}
-    engines: {node: '>=14.15.0'}
-    requiresBuild: true
-    dependencies:
-      color: 4.2.3
-      detect-libc: 2.0.2
-      node-addon-api: 6.1.0
-      prebuild-install: 7.1.1
-      semver: 7.5.4
-      simple-get: 4.0.1
-      tar-fs: 3.0.4
-      tunnel-agent: 0.6.0
-    dev: false
 
   /shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
