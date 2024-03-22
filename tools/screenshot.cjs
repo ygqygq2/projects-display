@@ -48,7 +48,7 @@ function readConfigFile() {
         return __generator(this, function (_a) {
             configFile = fs.readFileSync(path.join(__dirname, '../config.yaml'));
             config = yaml.load(configFile);
-            contentStr = "export default data = ".concat(JSON.stringify(config.projects));
+            contentStr = "export const data = ".concat(JSON.stringify(config.projects));
             fs.writeFileSync(path.join(__dirname, './config.data.ts'), contentStr);
             return [2 /*return*/, config];
         });

@@ -7,4 +7,16 @@ projects:
     frontend: https://wenjuan.ygqygq2.com
     backend: https://wenjuan-admin.ygqygq2.com
 
+  - title: vscode 扩展 turbo-file-header
+    description: 一个好用的代码文件头管理扩展
+    thumbnail: /public/images/turbo-file-header-thumbnail.png
+    frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-file-header&ssr=false#overview
+    backend:
+
+  - title: vscode 扩展 turbo-print-log
+    description: Turbo Console Log for more language
+    thumbnail: /public/images/turbo-print-log-thumbnail.png
+    frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-print-log&ssr=false#overview
+    backend:
+
 renew: false
