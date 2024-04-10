@@ -1,6 +1,6 @@
 <script setup lang="ts" name="CardContent">
-import {ref, onMounted} from 'vue';
-import {data} from '../../tools/config.data';
+import { onMounted, ref } from 'vue';
+import { data } from '../../tools/config.data';
 
 // 识别不到全局的定义类型，只好写在这了
 interface Project {
@@ -11,7 +11,7 @@ interface Project {
   backend: string;
 }
 
-const projects = ref<Project[]>(data)
+const projects = ref<Project[]>(data);
 
 function goToProject(url: string): void {
   window.open(url, '_blank');
@@ -34,16 +34,38 @@ function correctedThumbnail(thumbnail: string) {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="project, index in projects" :key="index">
+      <div
+        class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+        v-for="(project, index) in projects"
+        :key="index"
+      >
         <div class="card bg-secondary-subtle">
-          <img :src="correctedThumbnail(project.thumbnail)" alt="Project Thumbnail" class="img-fluid rounded">
+          <img
+            :src="correctedThumbnail(project.thumbnail)"
+            alt="Project Thumbnail"
+            class="img-fluid rounded"
+          />
           <div class="card-body">
-            <button v-if="project.frontend" type="button" class="btn btn-sm btn-info text-pink-600"
-              @click="goToProject(project.frontend)">前台</button>
-            <button v-if="project.backend" type="button" class="btn btn-sm btn-secondary text-green-600"
-              @click="goToProject(project.backend)">后台</button>
+            <button
+              v-if="project.frontend"
+              type="button"
+              class="btn btn-sm btn-info text-pink-600"
+              @click="goToProject(project.frontend)"
+            >
+              前台
+            </button>
+            <button
+              v-if="project.backend"
+              type="button"
+              class="btn btn-sm btn-secondary text-green-600"
+              @click="goToProject(project.backend)"
+            >
+              后台
+            </button>
             <h5 class="card-title text-center align-middle text-success">{{ project.title }}</h5>
-            <p class="card-text text-sm text-truncate" :title="project.description">{{ project.description }}</p>
+            <p class="card-text text-sm text-truncate" :title="project.description">
+              {{ project.description }}
+            </p>
           </div>
         </div>
       </div>
@@ -52,7 +74,11 @@ function correctedThumbnail(thumbnail: string) {
 </template>
 
 <style lang="scss" scoped>
-.card-body>button {
+.car {
+  margin-bottom: 10px;
+}
+
+.card-body > button {
   margin-right: 10px;
 }
 
