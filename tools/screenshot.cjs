@@ -56,7 +56,7 @@ function readConfigFile() {
 }
 function generateThumbnail(renew, project) {
     return __awaiter(this, void 0, void 0, function () {
-        var browser, page, url, rootPath, thumbnail, thumbnailPath, bigImgPath;
+        var browser, page, url, error_1, rootPath, thumbnail, thumbnailPath, bigImgPath;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, puppeteer.launch({ headless: 'new' })];
@@ -66,39 +66,53 @@ function generateThumbnail(renew, project) {
                 case 2:
                     page = _a.sent();
                     url = project.frontend || project.backend;
-                    return [4 /*yield*/, page.goto(url)];
+                    _a.label = 3;
                 case 3:
-                    _a.sent();
-                    // 调整视口大小以适应截图
-                    return [4 /*yield*/, page.setViewport({ width: 1280, height: 720 })];
+                    _a.trys.push([3, 5, , 7]);
+                    return [4 /*yield*/, page.goto(url)];
                 case 4:
+                    _a.sent();
+                    return [3 /*break*/, 7];
+                case 5:
+                    error_1 = _a.sent();
+                    console.error('访问网页时出错：', error_1);
+                    return [4 /*yield*/, browser.close()];
+                case 6:
+                    _a.sent();
+                    return [2 /*return*/];
+                case 7: 
+                // 调整视口大小以适应截图
+                return [4 /*yield*/, page.setViewport({ width: 1280, height: 720 })];
+                case 8:
                     // 调整视口大小以适应截图
                     _a.sent();
                     rootPath = (0, process_1.cwd)();
                     thumbnail = project.thumbnail;
                     thumbnailPath = path.join(rootPath, thumbnail);
                     bigImgPath = thumbnailPath.replace('-thumbnail', '');
-                    if (!renew) return [3 /*break*/, 7];
+                    if (!renew) return [3 /*break*/, 11];
+                    console.log('正在生成缩略图...');
                     return [4 /*yield*/, page.screenshot({ path: bigImgPath })];
-                case 5:
-                    _a.sent();
-                    return [4 /*yield*/, sharp(bigImgPath).resize(300).toFile(thumbnailPath)];
-                case 6:
-                    _a.sent();
-                    return [3 /*break*/, 10];
-                case 7:
-                    if (!!fs.existsSync(bigImgPath)) return [3 /*break*/, 10];
-                    return [4 /*yield*/, page.screenshot({ path: bigImgPath })];
-                case 8:
-                    _a.sent();
-                    return [4 /*yield*/, sharp(bigImgPath).resize(300).toFile(thumbnailPath)];
                 case 9:
                     _a.sent();
-                    _a.label = 10;
-                case 10: 
+                    return [4 /*yield*/, sharp(bigImgPath).resize(300).toFile(thumbnailPath)];
+                case 10:
+                    _a.sent();
+                    return [3 /*break*/, 14];
+                case 11:
+                    if (!(!fs.existsSync(bigImgPath) || !fs.existsSync(thumbnailPath))) return [3 /*break*/, 14];
+                    console.log('文件不存在，正在生成...');
+                    return [4 /*yield*/, page.screenshot({ path: bigImgPath })];
+                case 12:
+                    _a.sent();
+                    return [4 /*yield*/, sharp(bigImgPath).resize(300).toFile(thumbnailPath)];
+                case 13:
+                    _a.sent();
+                    _a.label = 14;
+                case 14: 
                 // 调整缩略图大小
                 return [4 /*yield*/, browser.close()];
-                case 11:
+                case 15:
                     // 调整缩略图大小
                     _a.sent();
                     return [2 /*return*/];
@@ -116,25 +130,15 @@ function generateThumbnail(renew, project) {
                 console.log('🚀 ~ file: screenshot.ts:57 ~ config:', config);
                 renew = config.renew;
                 projects = config.projects;
-                tasks = projects.map(function (project) { return __awaiter(void 0, void 0, void 0, function () {
-                    var error_1;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                _a.trys.push([0, 2, , 3]);
-                                return [4 /*yield*/, generateThumbnail(renew, project)];
-                            case 1:
-                                _a.sent();
-                                console.log('缩略图生成成功！');
-                                return [3 /*break*/, 3];
-                            case 2:
-                                error_1 = _a.sent();
-                                console.error('生成缩略图时出错：', error_1);
-                                return [3 /*break*/, 3];
-                            case 3: return [2 /*return*/];
-                        }
+                tasks = projects.map(function (project) {
+                    return generateThumbnail(renew, project)
+                        .then(function () {
+                        console.log('缩略图生成成功或已存在');
+                    })
+                        .catch(function (error) {
+                        console.error('生成缩略图时出错：', error);
                     });
-                }); });
+                });
                 return [4 /*yield*/, Promise.all(tasks)];
             case 2:
                 _a.sent();

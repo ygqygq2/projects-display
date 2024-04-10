@@ -27,7 +27,13 @@ async function generateThumbnail(renew: boolean, project: Project): Promise<void
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
   const url = project.frontend || project.backend;
-  await page.goto(url);
+  try {
+    await page.goto(url);
+  } catch (error) {
+    console.error('访问网页时出错：', error);
+    await browser.close();
+    return;
+  }
 
   // 调整视口大小以适应截图
   await page.setViewport({ width: 1280, height: 720 });
@@ -40,11 +46,13 @@ async function generateThumbnail(renew: boolean, project: Project): Promise<void
 
   // 判断是否需要更新缩略图
   if (renew) {
+    console.log('正在生成缩略图...');
     await page.screenshot({ path: bigImgPath });
     await sharp(bigImgPath).resize(300).toFile(thumbnailPath);
   } else {
     // 先判断文件是否存在，不存在则创建，存在则根据是否需要更新缩略图生成
-    if (!fs.existsSync(bigImgPath)) {
+    if (!fs.existsSync(bigImgPath) || !fs.existsSync(thumbnailPath)) {
+      console.log('文件不存在，正在生成...');
       await page.screenshot({ path: bigImgPath });
       await sharp(bigImgPath).resize(300).toFile(thumbnailPath);
     }
@@ -58,13 +66,14 @@ async function generateThumbnail(renew: boolean, project: Project): Promise<void
   console.log('🚀 ~ file: screenshot.ts:57 ~ config:', config);
   const { renew } = config;
   const projects: Project[] = config.projects;
-  const tasks = projects.map(async (project) => {
-    try {
-      await generateThumbnail(renew, project);
-      console.log('缩略图生成成功！');
-    } catch (error) {
-      console.error('生成缩略图时出错：', error);
-    }
+  const tasks = projects.map((project) => {
+    return generateThumbnail(renew, project)
+      .then(() => {
+        console.log('缩略图生成成功或已存在');
+      })
+      .catch((error) => {
+        console.error('生成缩略图时出错：', error);
+      });
   });
 
   await Promise.all(tasks);

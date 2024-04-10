@@ -74,16 +74,16 @@ function correctedThumbnail(thumbnail: string) {
 </template>
 
 <style lang="scss" scoped>
-.car {
-  margin-bottom: 10px;
+.card {
+  margin-bottom: 2rem;
 }
 
 .card-body > button {
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 .card-title {
   line-height: 1.2;
-  margin: 10px 0;
+  margin: 1rem 0;
 }
 </style>

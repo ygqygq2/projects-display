@@ -44,10 +44,7 @@ jobs:
       - name: Screenshot image
         run: |
           pnpm i -g typescript
-          cd tools
-          tsc screenshot.ts
-          \mv screenshot.js screenshot.cjs
-          cd ..
+          npm run tsc-tools
           node tools/screenshot.cjs
       - name: Build
         run: |
