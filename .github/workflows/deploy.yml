@@ -51,7 +51,7 @@ jobs:
           pnpm run build
           tar -zcvf dist.tar.gz dist
       - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
       - name: Scp file via ssh to server
