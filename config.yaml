@@ -1,5 +1,11 @@
 # 项目数据定义
 projects:
+  - title: easy-check
+    description: 一个带桌面界面的网络巡检工具，支持定时 ping、多主机检测、日志记录与飞书告警
+    thumbnail: /public/images/easy-check.png
+    frontend: https://github.com/ygqygq2/easy-check
+    backend:
+
   - title: PET SPACE
     description: 面向宠物家庭的温柔空间，当前聚焦清明祭奠、纪念馆与长期回访体验
     thumbnail: /public/images/pet-space-thumbnail.png

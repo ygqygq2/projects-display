@@ -25,8 +25,28 @@ function correctedThumbnail(thumbnail: string) {
   return thumbnail.replace('/public', '');
 }
 
-function projectTag(title: string) {
-  return title.includes('vscode 扩展') ? 'VS Code Extension' : 'Project';
+function projectTag(project: Project) {
+  if (project.title.includes('vscode 扩展')) {
+    return 'VS Code Extension';
+  }
+
+  if (project.title.toLowerCase().includes('easy-check')) {
+    return 'Desktop App';
+  }
+
+  return 'Project';
+}
+
+function primaryActionLabel(url: string) {
+  if (url.includes('github.com')) {
+    return '查看仓库';
+  }
+
+  if (url.includes('marketplace.visualstudio.com')) {
+    return '查看扩展';
+  }
+
+  return '查看详情';
 }
 </script>
 
@@ -48,7 +68,7 @@ function projectTag(title: string) {
           </div>
 
           <div class="project-card__body">
-            <span class="project-card__tag">{{ projectTag(project.title) }}</span>
+            <span class="project-card__tag">{{ projectTag(project) }}</span>
             <h3 class="project-card__title">{{ project.title }}</h3>
             <p class="project-card__description" :title="project.description">
               {{ project.description }}
@@ -61,7 +81,7 @@ function projectTag(title: string) {
                 class="btn btn-primary btn-sm project-card__button"
                 @click="goToProject(project.frontend)"
               >
-                查看详情
+                {{ primaryActionLabel(project.frontend) }}
               </button>
               <button
                 v-if="project.backend"
