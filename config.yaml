@@ -1,11 +1,10 @@
 # 项目数据定义
 projects:
-  - title: 问卷调查
-    description: react + antd + redux 项目，客户端使用 nextjs
-    # 必须是 xxx-thumbnail.png 格式
-    thumbnail: /public/images/wenjuan-thumbnail.png
-    frontend: https://wenjuan.ygqygq2.com
-    backend: https://wenjuan-admin.ygqygq2.com
+  - title: PET SPACE
+    description: 面向宠物家庭的温柔空间，当前聚焦清明祭奠、纪念馆与长期回访体验
+    thumbnail: /public/images/pet-space-thumbnail.png
+    frontend: https://www.pet-space.net/
+    backend:
 
   - title: vscode 扩展 turbo-file-header
     description: 一个好用的代码文件头管理扩展
@@ -13,10 +12,16 @@ projects:
     frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-file-header&ssr=false#overview
     backend:
 
-  - title: vscode 扩展 turbo-print-log
-    description: Turbo Console Log for more language
-    thumbnail: /public/images/turbo-print-log-thumbnail.png
-    frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-print-log&ssr=false#overview
+  - title: vscode 扩展 turbo-print-var
+    description: 一个更顺手的多语言变量打印增强扩展
+    thumbnail: /public/images/turbo-print-var-thumbnail.png
+    frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-print-var&ssr=false#overview
+    backend:
+
+  - title: vscode 扩展 turbo-ai-rules
+    description: 从 Git 仓库同步 AI 规则，并为 Cursor、Copilot、Continue 等工具生成配置
+    thumbnail: /public/images/turbo-ai-rules-thumbnail.png
+    frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-ai-rules
     backend:
 
 renew: false

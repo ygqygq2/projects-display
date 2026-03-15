@@ -1,7 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 import react from "@astrojs/react";
 import vue from "@astrojs/vue";
 import tailwind from "@astrojs/tailwind";
@@ -18,5 +17,5 @@ export default defineConfig({
     }
   },
   site: 'https://www.ygqygq2.com',
-  integrations: [mdx(), sitemap(), react(), vue(), tailwind()]
+  integrations: [mdx(), react(), vue(), tailwind()]
 });

@@ -1,68 +1,69 @@
-# Astro Starter Kit: Blog
+# projects-display
 
-```
-npm create astro@latest -- --template blog
-```
+这是一个基于 Astro 的项目展示站点，用来集中展示个人项目，并通过 `config.yaml` 维护项目数据、通过脚本生成展示缩略图。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+## 项目是怎么运作的
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+这个仓库的维护主线很简单：
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+1. 在 `config.yaml` 里维护项目列表。
+2. 运行同步脚本，把项目数据写入 `tools/config.data.ts`，并按需生成截图与缩略图。
+3. 本地预览确认页面展示正常。
+4. 构建产物并部署。
 
-Features:
+页面展示层主要由以下部分组成：
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+- `src/pages/index.astro`：站点首页入口。
+- `src/components/CardContent.vue`：读取 `tools/config.data.ts`，渲染项目卡片。
+- `src/components/ContactSidebar.vue`：左侧联系方式悬浮入口。
+- `public/images/`：项目原图和缩略图资源目录。
+- `tools/screenshot.ts`：根据 `config.yaml` 生成数据文件和截图。
 
-## 🚀 Project Structure
+## 常用命令
 
-Inside of your Astro project, you'll see the following folders and files:
+项目使用 `pnpm` 管理依赖。
 
-```
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+| 命令 | 作用 |
+| :--- | :--- |
+| `pnpm install` | 安装依赖并启用 git hooks |
+| `pnpm dev` | 启动本地开发服务器 |
+| `pnpm check` | 运行 Astro 类型检查 |
+| `pnpm build` | 构建生产版本 |
+| `pnpm preview` | 本地预览构建结果 |
+| `pnpm lint` | 修复 `src/` 下的 ESLint 问题 |
+| `pnpm sync:projects` | 根据 `config.yaml` 同步项目数据并生成截图/缩略图 |
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 日常维护最短路径
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### 新增或修改项目
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+1. 编辑 `config.yaml` 中的 `projects` 列表。
+2. 为每个项目填写：
+	- `title`
+	- `description`
+	- `thumbnail`
+	- `frontend` 或 `backend`
+3. `thumbnail` 必须使用 `/public/images/*-thumbnail.png` 命名。
+4. 运行 `pnpm sync:projects`。
+5. 运行 `pnpm dev` 或 `pnpm build` 检查页面。
 
-Any static assets, like images, can be placed in the `public/` directory.
+### 更新项目截图
 
-## 🧞 Commands
+- 默认情况下，脚本只会在原图或缩略图不存在时生成图片。
+- 如果想强制刷新全部截图，把 `config.yaml` 中的 `renew` 改为 `true`，然后运行 `pnpm sync:projects`。
+- 更新完成后建议把 `renew` 改回 `false`，避免每次都全量重跑。
 
-All commands are run from the root of the project, from a terminal:
+## 文档索引
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+更详细的维护说明见 `docs/`：
 
-## 👀 Want to learn more?
+- `docs/01-overview.md`：项目结构总览
+- `docs/02-content-maintenance.md`：项目数据维护
+- `docs/03-asset-generation.md`：截图与数据生成机制
+- `docs/04-release-checklist.md`：发布前检查清单
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 补充说明
 
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+- 仓库根目录下的 `index.md`、`api-examples.md` 是早期示例文件，当前 Astro 站点不会直接使用它们。
+- 当前站点地址配置在 `astro.config.mjs` 的 `site` 字段中：`https://www.ygqygq2.com`。
+- 提交前会通过 `simple-git-hooks` + `lint-staged` 自动处理部分格式化与检查。

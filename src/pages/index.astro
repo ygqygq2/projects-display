@@ -8,17 +8,44 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="zh-CN">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <script	src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' defer></script>
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
-		<main class="container">
-			<CardContent client:load />
+		<main class="container home-page">
+			<section class="project-section">
+				<div class="section-heading">
+					<span>精选项目</span>
+				</div>
+				<CardContent client:load />
+			</section>
 			<ContactSidebar client:load />
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.home-page {
+		padding-top: 1.5rem;
+	}
+
+	.project-section {
+		margin-bottom: 4rem;
+	}
+
+	.section-heading {
+		margin-bottom: 1rem;
+	}
+
+	.section-heading span {
+		display: inline-block;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: #4f46e5;
+	}
+</style>

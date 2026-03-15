@@ -16,7 +16,8 @@
     "lint": " eslint \"src/**/*.{ts,tsx,astro,vue}\" --fix",
     "postinstall": "simple-git-hooks",
     "preinstall": "npx only-allow pnpm",
-    "tsc-tools": "tsc tools/screenshot.ts && \\mv tools/screenshot.js tools/screenshot.cjs"
+    "tsc-tools": "tsc tools/screenshot.ts && \\mv tools/screenshot.js tools/screenshot.cjs",
+    "sync:projects": "pnpm run tsc-tools && node tools/screenshot.cjs"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": "pnpm run lint",
@@ -41,6 +42,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.7",
     "@astrojs/mdx": "^2.2.1",
     "@astrojs/react": "^3.1.0",
     "@astrojs/rss": "^4.0.5",
