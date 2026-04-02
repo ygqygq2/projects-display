@@ -6,6 +6,8 @@ import { data } from '../../tools/config.data';
 interface Project {
   title: string;
   description: string;
+  highlights?: string[];
+  stack?: string[];
   thumbnail: string;
   frontend: string | null;
   backend: string | null;
@@ -48,13 +50,21 @@ function primaryActionLabel(url: string) {
 
   return '查看详情';
 }
+
+function visibleHighlights(project: Project) {
+  return (project.highlights || []).slice(0, 3);
+}
+
+function visibleStack(project: Project) {
+  return (project.stack || []).slice(0, 6);
+}
 </script>
 
 <template>
   <div class="project-grid-wrap">
     <div class="row">
       <div
-        class="col-12 col-md-6 col-xl-4"
+        class="col-12 col-lg-6"
         v-for="(project, index) in projects"
         :key="index"
       >
@@ -68,11 +78,44 @@ function primaryActionLabel(url: string) {
           </div>
 
           <div class="project-card__body">
-            <span class="project-card__tag">{{ projectTag(project) }}</span>
+            <div class="project-card__header">
+              <span class="project-card__tag">{{ projectTag(project) }}</span>
+            </div>
             <h3 class="project-card__title">{{ project.title }}</h3>
             <p class="project-card__description" :title="project.description">
               {{ project.description }}
             </p>
+
+            <section
+              v-if="visibleHighlights(project).length"
+              class="project-card__section"
+            >
+              <p class="project-card__section-title">项目亮点</p>
+              <ul class="project-card__highlights">
+                <li
+                  v-for="(highlight, highlightIndex) in visibleHighlights(project)"
+                  :key="`${index}-highlight-${highlightIndex}`"
+                >
+                  {{ highlight }}
+                </li>
+              </ul>
+            </section>
+
+            <section
+              v-if="visibleStack(project).length"
+              class="project-card__section"
+            >
+              <p class="project-card__section-title">技术栈</p>
+              <div class="project-card__chips">
+                <span
+                  v-for="(item, stackIndex) in visibleStack(project)"
+                  :key="`${index}-stack-${stackIndex}`"
+                  class="project-card__chip"
+                >
+                  {{ item }}
+                </span>
+              </div>
+            </section>
 
             <div class="project-card__actions">
               <button
@@ -105,7 +148,9 @@ function primaryActionLabel(url: string) {
 }
 
 .project-card {
-  height: calc(100% - 1.6rem);
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 1.75rem);
   margin-bottom: 1.6rem;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.18);
@@ -139,7 +184,16 @@ function primaryActionLabel(url: string) {
 }
 
 .project-card__body {
-  padding: 1.25rem 1.25rem 1.4rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.4rem 1.4rem 1.55rem;
+}
+
+.project-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .project-card__tag {
@@ -156,24 +210,84 @@ function primaryActionLabel(url: string) {
 }
 
 .project-card__title {
-  margin-bottom: 0.7rem;
-  font-size: 1.15rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.22rem;
   line-height: 1.35;
 }
 
 .project-card__description {
   display: -webkit-box;
-  min-height: 3.4em;
-  margin-bottom: 1rem;
+  min-height: 4.6em;
+  margin-bottom: 1.05rem;
   overflow: hidden;
   color: rgba(var(--gray-dark), 0.8);
-  font-size: 0.96rem;
-  -webkit-line-clamp: 2;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+.project-card__section {
+  margin-bottom: 1rem;
+}
+
+.project-card__section-title {
+  margin-bottom: 0.55rem;
+  color: #475569;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.project-card__highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(var(--gray-dark), 0.82);
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+
+.project-card__highlights li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.project-card__highlights li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #6366f1;
+  font-weight: 700;
+}
+
+.project-card__highlights li + li {
+  margin-top: 0.35rem;
+}
+
+.project-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.project-card__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.7rem;
+  border: 1px solid rgba(99, 102, 241, 0.16);
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.06);
+  color: #4338ca;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .project-card__actions {
   display: flex;
+  margin-top: auto;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
@@ -182,10 +296,22 @@ function primaryActionLabel(url: string) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.3rem;
-  padding: 0.5rem 0.85rem;
-  line-height: 1.1;
+  height: 2.5rem;
+  padding: 0 1rem;
+  line-height: 1;
   font-family: inherit;
+  text-align: center;
+  white-space: nowrap;
   vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .project-card__body {
+    padding: 1.2rem 1.15rem 1.35rem;
+  }
+
+  .project-card__description {
+    min-height: auto;
+  }
 }
 </style>

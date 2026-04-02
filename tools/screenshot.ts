@@ -9,9 +9,11 @@ const yaml = require('js-yaml');
 interface Project {
   title: string;
   description: string;
+  highlights?: string[];
+  stack?: string[];
   thumbnail: string;
-  frontend: string;
-  backend: string;
+  frontend?: string | null;
+  backend?: string | null;
 }
 
 async function readConfigFile() {
