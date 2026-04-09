@@ -52,14 +52,15 @@ jobs:
       - name: Build
         run: |
           pnpm run build
-          tar -zcvf dist.tar.gz dist
       - uses: actions/configure-pages@v6.0.0
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-artifact@v7.0.0
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
-          name: github-pages
-          path: dist.tar.gz
+          path: dist
           retention-days: 1
+      - name: Package dist for server sync
+        run: |
+          tar -zcvf dist.tar.gz dist
       - name: Scp file via ssh to server
         uses: appleboy/scp-action@v0.1.7
         with:
