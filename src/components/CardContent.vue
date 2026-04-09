@@ -124,7 +124,9 @@ function visibleStack(project: Project) {
                 class="btn btn-primary btn-sm project-card__button"
                 @click="goToProject(project.frontend)"
               >
-                {{ primaryActionLabel(project.frontend) }}
+                <span class="project-card__button-label">
+                  {{ primaryActionLabel(project.frontend) }}
+                </span>
               </button>
               <button
                 v-if="project.backend"
@@ -132,7 +134,7 @@ function visibleStack(project: Project) {
                 class="btn btn-outline-secondary btn-sm project-card__button"
                 @click="goToProject(project.backend)"
               >
-                后台入口
+                <span class="project-card__button-label">后台入口</span>
               </button>
             </div>
           </div>
@@ -303,6 +305,11 @@ function visibleStack(project: Project) {
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
+}
+
+.project-card__button-label {
+  display: inline-block;
+  transform: translateY(1px);
 }
 
 @media (max-width: 768px) {

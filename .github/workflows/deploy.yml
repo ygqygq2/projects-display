@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
       - name: Setup pnpm
@@ -26,13 +26,13 @@ jobs:
         with:
           version: latest
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6.3.0
         with:
           node-version: 21
           cache: pnpm
           cache-dependency-path: 'pnpm-lock.yaml'
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5.0.4
         id: cache
         with:
           path: |
@@ -50,8 +50,8 @@ jobs:
         run: |
           pnpm run build
           tar -zcvf dist.tar.gz dist
-      - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6.0.0
+      - uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: dist
       - name: Scp file via ssh to server
@@ -88,4 +88,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5.0.0
