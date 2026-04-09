@@ -16,6 +16,14 @@ interface Project {
   backend?: string | null;
 }
 
+const SCREENSHOT_VIEWPORT = {
+  width: 1440,
+  height: 810,
+  deviceScaleFactor: 2,
+};
+
+const THUMBNAIL_WIDTH = 960;
+
 async function readConfigFile() {
   const configFile = fs.readFileSync(path.join(__dirname, '../config.yaml'));
   const config: any = yaml.load(configFile);
@@ -28,17 +36,15 @@ async function readConfigFile() {
 async function generateThumbnail(renew: boolean, project: Project): Promise<void> {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
+  await page.setViewport(SCREENSHOT_VIEWPORT);
   const url = project.frontend || project.backend;
   try {
-    await page.goto(url);
+    await page.goto(url, { waitUntil: 'networkidle2' });
   } catch (error) {
     console.error('访问网页时出错：', error);
     await browser.close();
     return;
   }
-
-  // 调整视口大小以适应截图
-  await page.setViewport({ width: 1280, height: 720 });
 
   // 获取图片文件名
   const rootPath = cwd();
@@ -46,17 +52,28 @@ async function generateThumbnail(renew: boolean, project: Project): Promise<void
   const thumbnailPath = path.join(rootPath, thumbnail);
   const bigImgPath = thumbnailPath.replace('-thumbnail', '');
 
+  async function writeImages() {
+    await page.screenshot({ path: bigImgPath });
+    await sharp(bigImgPath)
+      .resize({
+        width: THUMBNAIL_WIDTH,
+        withoutEnlargement: true,
+        kernel: sharp.kernel.lanczos3,
+      })
+      .sharpen()
+      .png({ compressionLevel: 9 })
+      .toFile(thumbnailPath);
+  }
+
   // 判断是否需要更新缩略图
   if (renew) {
     console.log('正在生成缩略图...');
-    await page.screenshot({ path: bigImgPath });
-    await sharp(bigImgPath).resize(300).toFile(thumbnailPath);
+    await writeImages();
   } else {
     // 先判断文件是否存在，不存在则创建，存在则根据是否需要更新缩略图生成
     if (!fs.existsSync(bigImgPath) || !fs.existsSync(thumbnailPath)) {
       console.log('文件不存在，正在生成...');
-      await page.screenshot({ path: bigImgPath });
-      await sharp(bigImgPath).resize(300).toFile(thumbnailPath);
+      await writeImages();
     }
   }
   // 调整缩略图大小

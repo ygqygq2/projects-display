@@ -1,5 +1,24 @@
 # 项目数据定义
 projects:
+  - title: Chinge Mall 在线商城
+    description: 一个前后端分离的在线商城项目，围绕首页精选、商品列表、商品详情等核心浏览链路构建，并打通商品、购物车、订单等电商业务能力。
+    highlights:
+      - 商城前台已上线，支持首页精选、商品列表与商品详情等核心浏览体验
+      - 后端统一承接用户、商品、购物车、订单、地址与支付等核心业务 API
+      - 前台与后端分层清晰，支持本地 docker 化依赖环境与持续迭代扩展
+    stack:
+      - Next.js 16
+      - React 19
+      - TypeScript 5
+      - Tailwind CSS 4
+      - Go
+      - Gin
+      - MySQL
+      - Redis
+    thumbnail: /public/images/chinge-mall-thumbnail.png
+    frontend: https://mall.datcn.com/
+    backend:
+
   - title: ByteGuard
     description: 一个面向 Java 商业软件保护场景的字节码加密方案，覆盖在线加密体验、CLI、Java Agent 与 License 管理链路，强调现代 Java 兼容与企业级落地。
     highlights:
