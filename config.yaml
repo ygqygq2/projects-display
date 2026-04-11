@@ -19,6 +19,23 @@ projects:
     frontend: https://mall.datcn.com/
     backend:
 
+  - title: Chinge Admin
+    description: 一个面向前后台业务场景的管理后台模板前端项目，沉淀了后台框架、主题系统、通用组件与页面骨架，商城后台等项目都基于它持续扩展。
+    highlights:
+      - 作为后台模板基座复用到多个业务项目，商城后台也基于它演进
+      - 内置主题模式、通用管理界面组件与可扩展页面骨架，适合快速起盘
+      - 基于现代前端栈构建，兼顾开发效率、界面质感与后续维护性
+    stack:
+      - React 19
+      - TypeScript 5
+      - Vite 7
+      - Chakra UI 3
+      - React Router 7
+      - Zod
+    thumbnail: /public/images/chinge-admin-thumbnail.png
+    frontend: https://chinge-admin.ygqygq2.com/
+    backend:
+
   - title: ByteGuard
     description: 一个面向 Java 商业软件保护场景的字节码加密方案，覆盖在线加密体验、CLI、Java Agent 与 License 管理链路，强调现代 Java 兼容与企业级落地。
     highlights:
