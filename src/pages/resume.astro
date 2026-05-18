@@ -1,0 +1,528 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const personalSkills = [
+	'具备完整全栈开发能力，熟练使用 React / Next.js 构建前端应用，使用 NestJS / Go / Python 开发后端服务，可独立完成从需求分析、功能实现到上线交付的完整闭环。',
+	'具备较强的业务理解与产品落地能力，能够把模糊需求拆解为页面、接口、数据结构与交付节点，推动后台系统、管理平台、工具系统等项目高效落地。',
+	'熟悉 TypeScript、Go、Python、Java、Shell 等语言及工程实践，能够根据场景选择合适技术栈，完成前后端联调、接口封装、工具开发与系统集成。',
+	'具备较强的后端与数据层设计能力，熟悉 MySQL、TiDB、MongoDB、Redis 等组件，能够完成表结构设计、接口开发、性能优化与业务数据支撑。',
+	'具备前端工程化与交互实现能力，熟悉组件化开发、页面状态管理、接口对接与管理后台体验优化，能够兼顾实现效率与维护成本。',
+	'具备运维开发与工程化交付能力，能够通过 Python、Go、Shell、TypeScript 等语言将重复性工作平台化、自动化、产品化，提升系统可维护性与团队交付效率。',
+	'熟悉 Docker、k8s、Helm、Jenkins、GitHub Actions、Ansible、Terraform 等工具，能够打通开发、测试、部署、发布、回滚的 CI/CD 自动化流程，为全栈项目稳定交付提供支撑。',
+	'拥有 15 年 Linux 运维与系统架构经验，5 年以上 k8s 生产集群管理经验，能够从基础设施、部署环境、可用性保障等维度为业务系统提供稳定底座。',
+	'熟悉 Prometheus、Grafana、ELK、Loki、Zabbix 等监控与日志体系，并具备阿里云、腾讯云、华为云等公有云实践经验，能够支撑项目上线后的观测、排障与持续优化。',
+	'熟悉 AI 辅助开发与工程化实践，能够在全栈开发场景中结合 Claude / Copilot / Cursor 提升编码、联调、文档与问题定位效率；兼具平台视角与业务视角，既能建设工程体系，也能快速响应业务需求完成应用级功能开发。',
+];
+
+const jobTargets = ['全栈开发工程师'];
+
+const skillSections = [
+	{
+		title: '前端开发',
+		items: ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'MUI', '后台系统与管理平台开发'],
+	},
+	{
+		title: '后端开发',
+		items: ['NestJS', 'Go', 'Python', 'FastAPI', 'Java', 'Spring Cloud', '接口服务与工具系统开发'],
+	},
+	{
+		title: '工程化与部署',
+		items: ['Docker', 'Kubernetes', 'Helm', 'Jenkins', 'GitHub Actions', 'Ansible', 'Terraform', 'CI/CD'],
+	},
+	{
+		title: '基础设施与数据',
+		items: ['Linux', 'Proxmox VE', 'Ceph', 'MySQL', 'TiDB', 'MongoDB', 'Redis', 'Elasticsearch'],
+	},
+	{
+		title: '可观测性与稳定性',
+		items: ['Prometheus', 'Grafana', 'ELK', 'Loki', 'Zabbix', '日志分析', '故障响应', '根因分析'],
+	},
+	{
+		title: 'AI 工程化',
+		items: ['RAG', 'Agent', 'LangChain', 'LlamaIndex', 'Copilot', 'Cursor', '企业知识库与智能体应用'],
+	},
+];
+
+const aiProjects = [
+	{
+		name: '基于 LangGraph 的智能应急决策系统',
+		period: '2025.01 - 2025.05',
+		background:
+			'针对园区安全监管中知识检索分散、风险评估复杂、应急资源调度低效等问题，研发基于 LLM 与机理模型融合的智能决策系统，实现从知识获取、定量评估到资源调度的智能化支持。',
+		role:
+			'作为核心负责人，主导智能体架构设计、工具调用链路设计、机理模型集成、RAG 优化、Text-to-SQL 能力建设与高性能推理服务部署。',
+		tech: ['Python', 'LangChain', 'LangGraph', 'MCP', 'LMDeploy', 'ChromaDB', 'Text-to-SQL', 'FastAPI'],
+		highlights: [
+			'基于 LangGraph 构建 ReAct 智能体编排架构，串联安全知识检索、应急资源查询、风险评估、应急指挥与公共工具等模块，实现任务动态分发、工具调用与专业化执行。',
+			'集成查询改写、混合检索、重排序等 RAG 优化策略，并基于 Ragas 建立 6 维度评估体系，将安全知识检索质量从 76.5% 提升至 94.7%。',
+			'通过表结构规范化描述、字段语义注释与查询模板优化，显著提升 Text-to-SQL 在设备台账、应急物资等场景中的查询准确率，达到 95% 以上。',
+			'基于 LangGraph 与 PostgreSQL 实现分级记忆存储和智能裁剪机制，并在高风险评估、资源匹配等关键节点引入 HITL 人工介入。',
+			'基于 LMDeploy 实现 Qwen-32B 模型的多卡分布式推理与量化优化，通过 FastAPI 构建高并发 API 服务，支撑系统实时决策需求，并兼顾性能与部署成本。',
+		],
+		results: [
+			'将事故初期评估时间从 2-3 小时缩短至 10 分钟内，应急资源查询响应从分钟级降至秒级，复杂场景资源匹配准确率达 92%。',
+			'整合机理模型与多源安全知识，形成基于证据的定量化风险评估能力，支撑园区日常演练、值班研判与事故复盘。',
+			'在园区应急演练中成功识别 3 处高风险场景，风险评估结果与专家判断吻合度达 92%。',
+		],
+	},
+	{
+		name: '基于多模态大模型的智慧园区智能搜图系统',
+		period: '2024.08 - 2024.12',
+		background:
+			'针对园区安防与消防场景中事件回溯效率低、人工翻查图像耗时长、语义检索不准等问题，研发基于多模态大模型的智能搜图系统，实现从实时快速检索到深度语义分析的智能化支撑。',
+		role:
+			'作为核心负责人，主导多模态检索架构设计、双路径索引构建、领域模型微调、元数据建模、高性能推理部署及搜索质量优化。',
+		tech: ['PyTorch', 'CLIP', 'Qwen-VL', 'BGE', 'Milvus', 'TensorRT', 'OpenCV', 'LMDeploy', 'QLoRA', 'FastAPI'],
+		highlights: [
+			'面向图搜图与文搜图场景设计双路径检索架构：图搜图基于 CLIP 构建视觉向量库保障实时性，文搜图基于 Qwen-VL 描述生成与 BGE 编码构建语义向量库保障语义精度。',
+			'针对安防消防场景构造 1000+ 样本进行 Qwen-VL-Chat 的 QLoRA 微调，提升模型对位置、状态、风险等级等专业语义的理解能力。',
+			'引入 BGE 重排序、TensorRT 推理加速与 LMDeploy 服务优化，将图像编码延迟从 15ms 降至 4ms，模型服务吞吐量提升 4 倍以上。',
+			'在 Milvus 中建立图搜图与文搜图双集合索引，关联结构化元数据并实现 TTL 生命周期管理，通过 FastAPI 提供统一检索服务，兼顾高并发场景下的稳定性与扩展性。',
+		],
+		results: [
+			'将安保人员定位历史相似事件的时间从平均 40 分钟缩短至 3 分钟内，复杂语义查询响应从几十分钟降至秒级。',
+			'将 Top-5 召回率从 72.3% 提升至 91.6%，文搜图关键属性匹配准确率超过 92%。',
+			'系统已部署于 3 个大型园区，日均处理检索请求超 5000 次，累计辅助处置安防事件 237 起、消防隐患 89 起。',
+		],
+	},
+];
+
+const experiences = [
+	{
+		company: '珠海惠达万安智慧城市科技有限公司',
+		department: '技术经理',
+		period: '2024.08 - 2026.02',
+		highlights: [
+			'统筹公司信息化基础设施、业务系统与研发支撑体系建设，负责 ERP、OA、智慧系统、物联网系统等核心平台的稳定运行与持续优化。',
+			'主导运维体系标准化建设，完善监控告警、故障响应、变更管理、容量规划、应急预案与根因分析机制，保障关键业务高可用。',
+			'推动运维开发与自动化平台建设，使用脚本与服务化工具沉淀部署、巡检、发布、权限、备份等高频场景能力，减少人工操作成本。',
+			'负责公司云资源与容器平台管理，推进系统上云、容器化改造、CI/CD 自动化发布及多环境配置管理，提升交付效率与环境一致性。',
+			'参与并推动业务系统全栈开发工作，基于 Next.js、React、NestJS、Go、Python 等技术栈支撑内部平台、管理后台、接口服务及工具系统建设。',
+			'建设统一监控与日志分析体系，打通基础设施、应用服务、数据库、网络设备等观测链路，提升问题定位与性能优化效率。',
+			'负责网络与信息安全管理，推进权限治理、安全审计、数据备份与灾备建设，降低核心系统运行风险。',
+			'推广 GitHub Copilot、Cursor 等 AI 工具在开发与运维场景中的使用，提升团队在编码、脚本编写、故障分析与文档沉淀方面的效率。',
+		],
+	},
+	{
+		company: '澳发科技（珠海横琴）有限公司',
+		department: '科技团队｜技术经理',
+		period: '2020.02 - 2024.08',
+		highlights: [
+			'加入初创期金融公司，从零规划并落地全司 IT 基础设施，覆盖数据中心选址与建设、网络架构设计、服务器与存储选型采购、安全基线制定到生产环境交付全链路，支撑公司从筹备期到业务上线的完整科技底座搭建。',
+			'设计符合银保监监管要求的双活数据中心架构，完成核心交易系统异地灾备与自动切换能力建设；主导编写科技治理制度、信息安全管理规范与应急预案体系，顺利通过银保监合规性评审与年度审计。',
+			'主导数字金融核心交易平台的微服务架构落地，在全离线生产环境下完成 Kubernetes 集群规划与部署，运维管理超 200 节点 Proxmox VE 超融合集群与多套 K8s 生产集群。',
+			'以 Ceph 提供分布式持久化卷，使用 Helm 实现统一应用编排与版本化发布，结合 Istio 做服务网格治理、灰度发布与流量管控。',
+			'制定 Namespace 多租户隔离策略、RBAC 权限模型与 ResourceQuota 资源配额规范，落地 HPA 弹性伸缩与 Pod 亲和性调度策略。',
+			'在完全隔离的内网环境中搭建离线 YUM/APT 源、私有 Harbor 镜像仓库与 GitLab 代码托管，打通离线环境下完整的软件供应链。',
+			'基于 Zabbix、Prometheus、Grafana、ELK 构建企业级多层次监控告警平台，覆盖基础设施、容器集群、应用性能、数据库与中间件全栈指标。',
+			'整合 GitLab CI、Jenkins、Harbor 打通代码提交、镜像构建、安全扫描、自动化测试、滚动部署与一键回滚全流程 CI/CD 流水线。',
+			'负责 MySQL 高可用集群、MongoDB 副本集、Redis 哨兵 / 集群等核心数据库的架构设计、性能调优、备份策略与容灾切换。',
+			'从零组建 SRE 团队，制定 SLO / SLI 指标体系与岗位技能矩阵，建立技术人员职业发展通道与梯队培养计划。',
+		],
+	},
+	{
+		company: '珠海优特智厨科技有限公司',
+		department: '运维工程师',
+		period: '2018.07 - 2020.03',
+		highlights: [
+			'在公司尚无容器化基础的情况下，从零规划并落地 Kubernetes 生产集群，基于官方文档独立完成选型、部署与调优。',
+			'以 Ceph 提供分布式持久化存储，Calico 管理集群网络策略，Helm 管理应用编排与版本化发布，Istio 实现灰度发布、流量镜像与服务网格治理。',
+			'推动公司核心业务全面从虚拟机迁移至容器化平台。',
+			'基于 GitLab、Harbor、Kubernetes 构建完整 CI/CD 流水线，打通代码提交、镜像构建、自动化测试、滚动发布与一键回滚全流程。',
+			'搭建 Prometheus、Grafana、ELK 全栈可观测体系，覆盖集群资源、Pod 状态、应用性能与容器日志。',
+			'结合 Ansible、Jenkins 实现节点初始化、配置变更、日常巡检等运维自动化，提升运维自动化覆盖率。',
+		],
+	},
+	{
+		company: '珠海芯桥科技有限公司',
+		department: '系统工程师',
+		period: '2017.08 - 2018.07',
+		highlights: [
+			'负责某政府单位人脸识别与视频分析平台的运维保障，系统日处理图片 / 视频数据量大，涉及物理隔离网络与专网环境，确保平台 7×24 稳定运行与数据安全合规。',
+			'规划并构建适配项目需求的高可用集群环境，基于 Ansible、Jenkins 实现自动化部署与运维。',
+			'输出标准化运维方案及脚本体系，提升运维效率与发布稳定性，并建立规范化文档。',
+		],
+	},
+	{
+		company: '中国兴业太阳能技术控股有限公司信息管理中心',
+		department: '运维组长',
+		period: '2016.10 - 2017.06',
+		highlights: [
+			'负责集团总部及多个子公司的 IT 基础设施运维，覆盖机房核心交换、服务器集群、存储系统、域控、VPN 组网、虚拟化平台、华为云桌面及邮件系统。',
+			'保障 ERP、泛微 OA 及生产管理系统 7×24 稳定运行。',
+			'参与集团新办公大楼机房整体搬迁与建设，完成网络架构规划、设备上架及业务系统割接，保障迁移期间核心业务零中断。',
+			'基于 Python 等进行泛微 OA 流程定制与二次开发，维护审批流程、表单及接口对接，同时开发运维自动化脚本提升日常巡检与故障处理效率。',
+			'主导制定运维管理制度与应急响应流程，建立突发事件分级处理与问题跟踪闭环机制，负责小组日常管理与技术交流。',
+		],
+	},
+	{
+		company: '通卡联城网络科技有限公司',
+		department: '运维工程师',
+		period: '2015.01 - 2016.08',
+		highlights: [
+			'参与 TSM（可信服务管理）平台的基础设施规划与落地，该平台支撑 NFC 手机替代城市公交一卡通。',
+			'负责机房建设、 IDC 选型、Web 集群与高可用数据库搭建，完成生产环境从零到上线的全流程交付。',
+			'负责多城市 NFC 发卡业务的系统发布、变更管理与监控保障，制定并推行运维规范，支撑业务稳定运营。',
+		],
+	},
+	{
+		company: '杭州云若网络科技有限公司',
+		department: '运维工程师',
+		period: '2014.07 - 2014.12',
+		highlights: ['完成电子商务平台尚妆网数据库读写分离改造与网站架构调整，显著提升系统承载能力与稳定性。'],
+	},
+	{
+		company: '广州菲音信息科技有限公司',
+		department: '运维工程师',
+		period: '2011.05 - 2014.06',
+		highlights: [
+			'主导网页游戏《凡人修真》系列运维及韩国、越南、台湾等海外代理商接入。',
+			'使用 Shell、AWK、SED、Python 开发装服、合服、备份、监控、版本更新等全套自动化脚本。',
+			'协作开发运维管理后台，显著提升运维自动化程度。',
+		],
+	},
+	{
+		company: '北京环亚时代电子信息有限公司',
+		department: '驻场工程师',
+		period: '2010.12 - 2011.04',
+		highlights: ['驻场珠海工行软件园，负责 DELL 企业级服务器、存储设备的现场维护与故障处理，提供硬件级技术支持，保障金融行业核心业务系统稳定运行。'],
+	},
+	{
+		company: '珠海华润万家',
+		department: '系统工程师',
+		period: '2010.08 - 2010.12',
+		highlights: ['负责华润万家信息部主机、服务器及终端设备的日常运维与故障处理，跟进新门店开业的 IT 环境部署与割接工作，保障各门店业务系统按时上线稳定运行。'],
+	},
+];
+
+const education = [
+	'长沙理工大学｜本科｜经济信息管理｜2007 - 2012',
+	'湖南工业职业技术学院｜大专｜计算机网络技术｜2007 - 2010',
+];
+
+const certificates = ['PMP 证书', '信息系统项目管理师证书'];
+---
+
+<html lang="zh-CN">
+	<head>
+		<BaseHead
+			title="在线简历"
+			description="Chinge Yang 的在线简历，聚焦全栈开发、工程化实践与长期可维护的系统建设。"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="resume-page">
+			<section class="resume-sheet">
+				<header class="resume-header">
+					<div>
+						<p class="eyebrow">在线简历</p>
+						<h1>Chinge Yang</h1>
+						<p class="headline">全栈开发</p>
+					</div>
+					<ul class="contact-list">
+						<li><strong>微信：</strong>ygqygq2</li>
+						<li><strong>邮箱：</strong>ygqygq2@qq.com</li>
+						<li>
+							<strong>GitHub：</strong>
+							<a href="https://github.com/ygqygq2" target="_blank" rel="noreferrer">github.com/ygqygq2</a>
+						</li>
+					</ul>
+				</header>
+
+				<section class="resume-section">
+					<h2>个人技能 / 优势</h2>
+					<ul>
+						{personalSkills.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+
+				<section class="resume-section">
+					<h2>目标方向</h2>
+					<ul>
+						{jobTargets.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+
+				<section class="resume-section">
+					<h2>核心技术</h2>
+					<details class="fold-section">
+						<summary>展开查看核心技术</summary>
+						<div class="fold-content">
+							{skillSections.map((section) => (
+								<div class="list-block">
+									<h3>{section.title}</h3>
+									<ul>
+										{section.items.map((item) => <li>{item}</li>)}
+									</ul>
+								</div>
+							))}
+						</div>
+					</details>
+				</section>
+
+				<section class="resume-section">
+					<h2>工作经历</h2>
+					{experiences.map((item) => (
+						<article class="experience-item">
+							<div class="experience-head">
+								<div>
+									<h3>{item.company}</h3>
+									<p class="role">{item.department}</p>
+								</div>
+								<p class="period">{item.period}</p>
+							</div>
+							<ul>
+								{item.highlights.map((highlight) => <li>{highlight}</li>)}
+							</ul>
+						</article>
+					))}
+				</section>
+
+				<section class="resume-section">
+					<h2>项目经历</h2>
+					<details class="fold-section">
+						<summary>展开查看 AI 项目</summary>
+						<div class="fold-content">
+							{aiProjects.map((project) => (
+								<article class="project-item">
+									<div class="experience-head">
+										<h3>{project.name}</h3>
+										<p class="period">{project.period}</p>
+									</div>
+									<p><strong>项目背景：</strong>{project.background}</p>
+									<p><strong>项目职责：</strong>{project.role}</p>
+									<p><strong>关键技术：</strong>{project.tech.join('、')}</p>
+									<div class="list-block">
+										<h3>项目亮点</h3>
+										<ul>
+											{project.highlights.map((item) => <li>{item}</li>)}
+										</ul>
+									</div>
+									<div class="list-block">
+										<h3>项目成果</h3>
+										<ul>
+											{project.results.map((item) => <li>{item}</li>)}
+										</ul>
+									</div>
+								</article>
+							))}
+						</div>
+					</details>
+				</section>
+
+				<section class="resume-section">
+					<h2>教育背景</h2>
+					<ul>
+						{education.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+
+				<section class="resume-section">
+					<h2>证书</h2>
+					<ul>
+						{certificates.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+			</section>
+		</main>
+		<Footer />
+	</body>
+
+<style>
+	.resume-page {
+		width: min(980px, calc(100% - 2rem));
+		max-width: min(980px, calc(100% - 2rem));
+		padding-top: 2rem;
+		padding-bottom: 5rem;
+	}
+
+	.resume-sheet {
+		background: rgba(255, 255, 255, 0.94);
+		border: 1px solid rgba(148, 163, 184, 0.18);
+		border-radius: 18px;
+		box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+		padding: 2.25rem;
+	}
+
+	.resume-header {
+		display: flex;
+		justify-content: space-between;
+		gap: 2rem;
+		padding-bottom: 1.5rem;
+		margin-bottom: 1.75rem;
+		border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+	}
+
+	.eyebrow {
+		margin: 0 0 0.35rem;
+		color: #4f46e5;
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.resume-header h1 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3rem);
+	}
+
+	.headline {
+		margin: 0.55rem 0 0;
+		font-size: 1.05rem;
+		font-weight: 600;
+		color: rgb(var(--gray));
+	}
+
+	.contact-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		min-width: 260px;
+	}
+
+	.contact-list li + li {
+		margin-top: 0.45rem;
+	}
+
+	.resume-section + .resume-section {
+		margin-top: 1.85rem;
+	}
+
+	.resume-section h2 {
+		font-size: 1.45rem;
+		margin-bottom: 1rem;
+		padding-bottom: 0.45rem;
+		border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+	}
+
+	.resume-section h3 {
+		font-size: 1.08rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.resume-section ul,
+	.resume-section ol {
+		margin: 0;
+		padding-left: 1.35rem;
+	}
+
+	.resume-section ul {
+		list-style: disc outside;
+	}
+
+	.resume-section ol {
+		list-style: decimal outside;
+	}
+
+	.resume-section li::marker {
+		color: rgba(51, 65, 85, 0.9);
+	}
+
+	.resume-section li + li {
+		margin-top: 0.45rem;
+	}
+
+	.resume-section p {
+		margin: 0.5rem 0 0;
+	}
+
+	.list-block + .list-block,
+	.experience-item + .experience-item,
+	.project-item + .project-item {
+		margin-top: 1.25rem;
+	}
+
+	.fold-section {
+		border: 1px solid rgba(148, 163, 184, 0.18);
+		border-radius: 12px;
+		padding: 0.25rem 0.85rem 0.85rem;
+		background: rgba(248, 250, 252, 0.55);
+	}
+
+	.fold-section summary {
+		cursor: pointer;
+		font-weight: 600;
+		color: #334155;
+		padding: 0.7rem 0;
+		user-select: none;
+	}
+
+	.fold-section summary:hover {
+		color: #4338ca;
+	}
+
+	.fold-content {
+		padding-top: 0.25rem;
+	}
+
+	.experience-head {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		align-items: baseline;
+		margin-bottom: 0.55rem;
+	}
+
+	.role,
+	.period {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.98rem;
+	}
+
+	.period {
+		white-space: nowrap;
+	}
+
+	@media (max-width: 720px) {
+		.resume-page {
+			width: calc(100% - 1rem);
+			max-width: calc(100% - 1rem);
+			padding-top: 1rem;
+			padding-bottom: 3rem;
+		}
+
+		.resume-sheet {
+			padding: 1.25rem;
+			border-radius: 14px;
+		}
+
+		.resume-header,
+		.experience-head {
+			flex-direction: column;
+		}
+
+		.contact-list {
+			min-width: 0;
+		}
+	}
+
+	@media print {
+		body {
+			background: #fff;
+		}
+
+		header,
+		footer {
+			display: none;
+		}
+
+		.resume-page {
+			width: 100%;
+			max-width: 100%;
+			padding: 0;
+		}
+
+		.resume-sheet {
+			padding: 0;
+			border: none;
+			box-shadow: none;
+		}
+	}
+</style>
+
+</html>
