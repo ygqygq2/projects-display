@@ -46,8 +46,7 @@ jobs:
       - run: pnpm i --frozen-lockfile || pnpm i
       - name: Screenshot image
         run: |
-          pnpm i -g typescript
-          npm run tsc-tools
+          pnpm run tsc-tools
           node tools/screenshot.cjs
       - name: Build
         run: |
