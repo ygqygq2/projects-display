@@ -136,4 +136,19 @@ projects:
     frontend: https://marketplace.visualstudio.com/items?itemName=ygqygq2.turbo-ai-rules
     backend:
 
+  - title: 世界杯预测
+    description: 一个聚焦 2026 世界杯赛程的 AI 预测网站，围绕比赛日预测、淘汰赛树形图与小组积分榜提供实时可视化与赛果对照。
+    highlights:
+      - 提供比赛日预测流，已结束场次自动对比预测比分与实际赛果
+      - 支持小组赛积分榜与淘汰赛树形图双视图切换，信息聚合更直观
+      - 单场详情展示置信度、关键因子排序与解释性分析，提升预测可读性
+    stack:
+      - AI 预测
+      - 足球数据可视化
+      - 赛事数据分析
+      - 响应式 Web
+    thumbnail: /public/images/worldcup-predict-thumbnail.png
+    frontend: https://worldcup.datcn.com/
+    backend:
+
 renew: false
